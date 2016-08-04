@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:local="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout
+        android:id="@+id/fragment_shopping_list_refresher"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        local:layout_behavior="@string/appbar_scrolling_view_behavior"
+        local:MvxBind="Refreshing IsRefreshing; RefreshCommand ReloadCommand; Visible Count, Converter=HasItemsVisibility">
+        <MvxRecyclerView
+            android:id="@+id/fragment_shopping_list_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="78dp"
+            android:clipToPadding="false"
+            local:MvxItemTemplate="@layout/row_shopping_item"
+            local:MvxBind="ItemsSource ShoppingItems; ItemClick ShoppingItemSelected" />
+    </MvvmCross.Droid.Support.V4.MvxSwipeRefreshLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        local:MvxBind="Visible Count, Converter=HasNoItemsVisibility">
+        <LinearLayout
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="78dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="No shopping items." />
+            <Button
+                android:theme="@style/AccentButton"
+                android:id="@+id/fragment_shopping_list_button_create"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Add a shopping item"
+                android:textColor="#FFFFFF"
+                android:drawableLeft="@drawable/ic_add_shopping_cart_white_24dp" />
+            <Button
+                android:theme="@style/OneDriveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Sync with OneDrive"
+                android:textColor="#FFFFFF"
+                local:MvxBind="Click OneDriveCommand" />
+        </LinearLayout>
+    </RelativeLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fragment_shopping_list_fab_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_shopping_cart_white_24dp"
+        android:layout_margin="16dp"
+        android:layout_gravity="bottom|right"
+        local:elevation="4dp"
+        local:backgroundTint="@color/accent"
+        local:rippleColor="@color/accent_darkest"
+        local:layout_behavior="@string/fab_scroll_translation_autohide_behavior" />
+</android.support.design.widget.CoordinatorLayout>

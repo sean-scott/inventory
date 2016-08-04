@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+  <style name="AppTheme" parent="AppTheme.Base"/>
+  
+  <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
+
+    <!-- Override app bar color -->
+    <item name="colorPrimary">@color/brown_500</item>
+
+    <!-- Override status bar color -->
+    <item name="colorPrimaryDark">@color/brown_900</item>
+
+    <item name="colorAccent">#455A64</item>
+
+    <!-- Override nav bar color -->
+    <item name="android:navigationBarColor">@color/brown_900</item>
+    
+    <item name="windowNoTitle">true</item>
+    
+    <!--We will be using the toolbar so no need to show ActionBar-->
+    <item name="windowActionBar">false</item>
+
+  </style>
+
+  <style name="AccentButton" parent="Widget.AppCompat.Button.Colored">
+    <item name="colorButtonNormal">@color/accent</item>
+    <item name="android:textColorPrimary">#fff</item>
+  </style>
+  
+  <style name="WhiteButton" parent="Widget.AppCompat.Button.Colored">
+    <item name="colorButtonNormal">#fff</item>
+    <item name="android:textColorPrimary">#000</item>
+  </style>
+
+  <style name="OneDriveButton" parent="Widget.AppCompat.Button.Colored">
+    <item name="colorButtonNormal">@color/onedrive</item>
+    <item name="android:textColorPrimary">#fff</item>
+  </style>
+  
+</resources>

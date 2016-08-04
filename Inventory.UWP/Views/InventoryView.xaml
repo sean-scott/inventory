@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="Inventory.UWP.Views.InventoryView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Inventory.UWP.Views"
+    xmlns:converter="using:Inventory.UWP.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    x:Name="xInventoryView">
+
+    <Page.Resources>
+        <converter:DatePurchasedVisibilityValueConverter x:Key="DatePurchasedVisibility"/>
+        <converter:DateToSimpleStringValueConverter x:Key="DateToSimpleString"/>
+        <converter:QuantityVisibilityValueConverter x:Key="QuantityVisibility"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel Orientation="Vertical">
+            <ComboBox x:Name="InventoryComboBox" Margin="0,0,0,12" SelectionChanged="InventoryComboBox_SelectionChanged"/>
+            <ListView x:Name="InventoryListView" ItemsSource="{Binding Items}" ItemClick="InventoryListView_ItemClick" 
+                  IsHitTestVisible="True" SelectionMode="None" 
+                  IsItemClickEnabled="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid x:Name="ItemGrid">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" MaxWidth="60"/>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <!-- Image in Grid.Column 0 -->
+                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" Grid.Column="1" Margin="6">
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text="{Binding DatePurchased, Converter={StaticResource DateToSimpleString}}" Visibility="{Binding DatePurchased, Converter={StaticResource DatePurchasedVisibility}}"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Column="2" Margin="6" Visibility="{Binding Quantity, Converter={StaticResource QuantityVisibility}}">
+                                <Button Command="{Binding DataContext.ItemQuantityUpCommand, ElementName=xInventoryView}" CommandParameter="{Binding}" Margin="2" HorizontalAlignment="Center" Background="Transparent" Content="&#xE010;" FontFamily="Segoe UI Symbol"/>
+                                <TextBlock Text="{Binding Quantity}" HorizontalAlignment="Center"/>
+                                <Button Command="{Binding DataContext.ItemQuantityDownCommand, ElementName=xInventoryView}" CommandParameter="{Binding}" Margin="2" HorizontalAlignment="Center" Background="Transparent" Content="&#xE011;" FontFamily="Segoe UI Symbol"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+            </ListView>
+        </StackPanel>
+
+        <CommandBar Background="#00ffffff" VerticalAlignment="Bottom">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Icon="Edit" Label="Edit"/>
+                <AppBarButton Icon="Scan" Label="Scan barcode"/>
+                <AppBarButton Icon="Add" Label="Add item" Command="{Binding CreateNewItemCommand}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Grid>
+</Page>

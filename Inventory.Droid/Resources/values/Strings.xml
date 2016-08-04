@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Hello World, Click Me!</string>
+	<string name="app_name">Stuff</string>
+  <string-array name="filters">
+    <item>Category</item>
+    <item>Location</item>
+  </string-array>
+  <string-array name="orders">
+    <item>Ascending</item>
+    <item>Descending</item>
+  </string-array>
+  <string-array name="sorts">
+    <item>Alphabetically</item>
+    <item>Date Modified</item>
+    <item>Date Purchased</item>
+    <item>Recently Added</item>
+    <item>Value</item>
+  </string-array>
+</resources>
